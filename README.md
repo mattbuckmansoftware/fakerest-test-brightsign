@@ -1,18 +1,34 @@
 # fakerest-test-brightsign
 
 ## Install Prerequisites
-`sudo apt-get install -y build-essential curl libcurl4-openssl-dev libsimdjson-dev`
+```
+sudo apt-get install -y build-essential curl libcurl4-openssl-dev libsimdjson-dev
+```
 
 ## Build and Run
-`make`
-`./fakerest_test_brightsign http://test.brightsign.io:3000`
+```
+make
+./fakerest_test_brightsign http://test.brightsign.io:3000
+```
 
 Options are available to customize the data fields output by the program. However, all data fields are printed if no options are used.
-Use the `-h` flag to learn about the available options.
+Use the `-h` flag to learn about the available options or see below.
+```
+Usage: program <endpoint> [options; defaults to "all"]
+Options:
+  -h             Show this [H]elp message
+  -y             Retrieve [Y]ears of life, average per city
+  -f             Retrieve [F]riend count, average per city
+  -m             Retrieve user with [M]ost friend count, per city
+  -n             Retrieve most common first [N]ame, across all cities
+  -r             Retrieve most common [R]ecreational hobby, across all friends in all cities
+```
 
 ## Build Tests and Run
-`make test`
-`./run_tests`
+```
+make test
+./run_tests
+```
 
 ## Security
 ### Encryption
