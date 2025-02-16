@@ -61,7 +61,7 @@ int main(int argc, char* argv[]) {
 
     if(retries >= max_retries){
         std::cerr << "Exceeded retry limit; JSON data could not be pulled." << std::endl;
-        return 1;
+        return 2;
     }
 
     //Parse JSON
@@ -69,7 +69,7 @@ int main(int argc, char* argv[]) {
     parser.parseJSON(read_buffer);
 
     //Print Output
-    parser.printOutput(options);
+    std::cout << parser.toJSONString(options) << std::endl;
 
     return 0;
 }

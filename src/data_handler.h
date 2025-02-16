@@ -70,10 +70,14 @@ class DataHandler
 public:
     DataHandler();
 
+    //This function parses the relevant data from the given string
     int parseJSON(const std::string& read_buffer);
-    void printOutput(const std::unordered_map<std::string, std::string>& options);
+
+    //This function composes the relevant data into a JSON string, in accordance with the given options
+    std::string toJSONString(const std::unordered_map<std::string, std::string>& options);
 
 private:
+    //Helper functions
     static bool extractAge(simdjson::ondemand::document& json, uint64_t& age);
     static bool extractName(simdjson::ondemand::document& json, std::string& name_str);
     static bool extractCity(simdjson::ondemand::document& json, std::string& city_str);
@@ -83,6 +87,7 @@ private:
     void updateCities(const std::string& city_str, uint64_t age, size_t friend_count);
     void updateHobbies(const std::vector<std::pair<std::string, std::vector<std::string>>>& friends_hobbies);
 
+    //Member variables
     std::unordered_map<std::string, CityData> cities_;
     std::unordered_map<std::string, size_t> names_;
     std::unordered_map<std::string, size_t> hobbies_;

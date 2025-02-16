@@ -38,13 +38,19 @@ If the data being pulled were sensitive, it would be best to use `https` or, eve
 The `simdjson` JSON parsing library was used, rather than implementing a custom JSON parser. This adds security by using a well-tested utility. Although, it has a downside, in that any vulnerabilities that do exist will be common-knowledge to bad actors.
 
 ### Logging
-The contents of invalid lines does not get stored (in logs, etc.), since that could be a way for a bad actor to emplace malicious code onto a device for future execution (either in a multi-step exploit or when the logs are read later). Likewise, the contents of valid lines is not logged, since that would be bad practice (if this data were actually sensitive).
+The contents of invalid lines does not get stored (in logs, etc.), since that could be a way for a bad actor to emplace malicious code onto a device for future execution (either in a multi-step exploit or when the logs are read later). Likewise, the contents of valid lines is not logged, since that would be potential data leak a bad actor could use in the future (if this data were actually sensitive).
 
 ## Data Format (IN)
 Input data (which will be retrieved from the given endpoint) is an array of user objects. Each new line is treated as a standalone JSON object. If that line is invalid, the data on that line will be ignored.
+### Example Input
+The input is JSON objects on multiple lines, as shown below.
+```
+{"id":0,"name":"Elijah","city":"Austin","age":78,"friends":[{"name":"Robert","hobbies":["Traveling","Video Games"]}]}
+{"id":1,"name":"Noah","city":"Boston","age":97,"friends":[{"name":"Oliver","hobbies":["Watching Sports"]},{"name":"Olivia","hobbies":["Running","Music"]}]}
+```
 
 ## Data Format (OUT)
-Unless options are used to specify only certain fields to be shown, the output will be a JSON object containing the following keys: `"city_data"`, `"most_common_name"`, and `"most_common_hobby"`.
+Unless options are used to specify that only certain fields should be shown, the output will be a JSON object containing the following keys: `"city_data"`, `"most_common_name"`, and `"most_common_hobby"`.
 ### city_data
 The value of `"city_data"` is an array containing JSON objects. The keys in the objects are `"city"` (the city name) and `"data"` (containing keys/values for `"average_age"` (float), `"average_friend_count"` (float), and `"most_friends_count"` (int)).
 
@@ -82,182 +88,6 @@ The output is a single JSON object, as shown below.
 				"average_friend_count": 4.01215,
 				"most_friends_count": 6
 			}
-		},
-		{
-			"city": "Honolulu",
-			"data": {
-				"average_age": 58.7605,
-				"average_friend_count": 4.00462,
-				"most_friends_count": 6
-			}
-		},
-		{
-			"city": "Sedona",
-			"data": {
-				"average_age": 58.6583,
-				"average_friend_count": 4.00025,
-				"most_friends_count": 6
-			}
-		},
-		{
-			"city": "Chicago",
-			"data": {
-				"average_age": 58.1431,
-				"average_friend_count": 4.03008,
-				"most_friends_count": 6
-			}
-		},
-		{
-			"city": "San Francisco",
-			"data": {
-				"average_age": 58.153,
-				"average_friend_count": 3.98254,
-				"most_friends_count": 6
-			}
-		},
-		{
-			"city": "Washington",
-			"data": {
-				"average_age": 58.4237,
-				"average_friend_count": 3.98838,
-				"most_friends_count": 6
-			}
-		},
-		{
-			"city": "St. Louis",
-			"data": {
-				"average_age": 58.5784,
-				"average_friend_count": 3.98769,
-				"most_friends_count": 6
-			}
-		},
-		{
-			"city": "Seattle",
-			"data": {
-				"average_age": 58.6795,
-				"average_friend_count": 3.97279,
-				"most_friends_count": 6
-			}
-		},
-		{
-			"city": "Portland",
-			"data": {
-				"average_age": 58.5875,
-				"average_friend_count": 4.00995,
-				"most_friends_count": 6
-			}
-		},
-		{
-			"city": "Austin",
-			"data": {
-				"average_age": 58.4033,
-				"average_friend_count": 3.9858,
-				"most_friends_count": 6
-			}
-		},
-		{
-			"city": "Palm Springs",
-			"data": {
-				"average_age": 58.3151,
-				"average_friend_count": 4.0005,
-				"most_friends_count": 6
-			}
-		},
-		{
-			"city": "Los Angeles",
-			"data": {
-				"average_age": 58.3727,
-				"average_friend_count": 4.00914,
-				"most_friends_count": 6
-			}
-		},
-		{
-			"city": "Nashville",
-			"data": {
-				"average_age": 58.048,
-				"average_friend_count": 3.98408,
-				"most_friends_count": 6
-			}
-		},
-		{
-			"city": "Charleston",
-			"data": {
-				"average_age": 58.9596,
-				"average_friend_count": 3.95647,
-				"most_friends_count": 6
-			}
-		},
-		{
-			"city": "Lahaina",
-			"data": {
-				"average_age": 58.2591,
-				"average_friend_count": 4.00577,
-				"most_friends_count": 6
-			}
-		},
-		{
-			"city": "Saint Augustine",
-			"data": {
-				"average_age": 58.2848,
-				"average_friend_count": 3.96721,
-				"most_friends_count": 6
-			}
-		},
-		{
-			"city": "New Orleans",
-			"data": {
-				"average_age": 58.8876,
-				"average_friend_count": 4.00546,
-				"most_friends_count": 6
-			}
-		},
-		{
-			"city": "Las Vegas",
-			"data": {
-				"average_age": 58.338,
-				"average_friend_count": 3.99563,
-				"most_friends_count": 6
-			}
-		},
-		{
-			"city": "Branson",
-			"data": {
-				"average_age": 58.8979,
-				"average_friend_count": 4.01981,
-				"most_friends_count": 6
-			}
-		},
-		{
-			"city": "San Antonio",
-			"data": {
-				"average_age": 58.2133,
-				"average_friend_count": 3.9944,
-				"most_friends_count": 6
-			}
-		},
-		{
-			"city": "Miami Beach",
-			"data": {
-				"average_age": 58.0056,
-				"average_friend_count": 4.03512,
-				"most_friends_count": 6
-			}
-		},
-		{
-			"city": "Boston",
-			"data": {
-				"average_age": 58.2029,
-				"average_friend_count": 4.01298,
-				"most_friends_count": 6
-			}
-		},
-		{
-			"city": "Orlando",
-			"data": {
-				"average_age": 58.5398,
-				"average_friend_count": 3.99108,
-				"most_friends_count": 6
-			}
 		}
 	],
 	"most_common_name": {
@@ -270,3 +100,6 @@ The output is a single JSON object, as shown below.
 	}
 }
 ```
+
+## Error Handling
+As already mentioned, invalid lines of data will be thrown out (and the event will be logged to /tmp/fakerestlog<yyyymmdd>.log). However, if there's an error accessing the data in the first place, the program will attempt to reach the endpoint up to 3 times with 5 second pauses between attempts. After that, an error return code (2) will be yielded and execution will halt.

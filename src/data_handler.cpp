@@ -186,9 +186,8 @@ int DataHandler::parseJSON(const std::string& read_buffer) {
     return valid_count;
 }
 
-//This function prints the contents of the destination variables as JSON, according to requested options
-void DataHandler::printOutput(const std::unordered_map<std::string, std::string>& options) {
-    
+//This function returns the output JSON, according to requested options
+std::string DataHandler::toJSONString(const std::unordered_map<std::string, std::string>& options) {
     const bool printAll = options.empty();
     auto shouldPrint = [&options, printAll](const std::string& opt) {
         return printAll || options.find(opt) != options.end();
@@ -243,5 +242,5 @@ void DataHandler::printOutput(const std::unordered_map<std::string, std::string>
     json.seekp(-2, std::ios_base::end); // Remove trailing comma and newline
     json << "\n}";
 
-    std::cout << json.str() << std::endl;
+    return json.str();
 }
