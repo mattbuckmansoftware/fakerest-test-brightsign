@@ -1,8 +1,8 @@
 CXX = g++
 CXXFLAGS = -std=c++20 -Wall -Wextra
 LDFLAGS = -lcurl $(shell pkg-config --libs simdjson)
-CPPFLAGS = $(shell pkg-config --cflags simdjson) -I/opt/homebrew/Cellar/googletest/1.16.0/include
-GTEST_FLAGS = -lgtest -lgtest_main -pthread -L/opt/homebrew/Cellar/googletest/1.16.0/lib
+CPPFLAGS = $(shell pkg-config --cflags simdjson) -I/usr/include/gtest/ -I/opt/homebrew/Cellar/googletest/1.16.0/include
+GTEST_FLAGS = -lgtest -lgtest_main -pthread -L/opt/homebrew/Cellar/googletest/1.16.0/lib -L/usr/lib
 
 TARGET = fakerest_test_brightsign
 TEST_TARGET = run_tests

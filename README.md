@@ -2,7 +2,7 @@
 
 ## Install Prerequisites
 ```
-sudo apt-get install -y build-essential curl libcurl4-openssl-dev libsimdjson-dev
+sudo apt-get install -y build-essential curl libcurl4-openssl-dev libsimdjson-dev pkg-config libgtest-dev
 ```
 
 ## Build and Run
